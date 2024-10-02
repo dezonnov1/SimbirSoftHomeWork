@@ -1,4 +1,4 @@
 public interface shooting {
-    public void shoot();
+    public int shoot(player attacker, player prey);
     public void reload();
 }
