@@ -1,60 +1,76 @@
+import java.util.regex.Pattern;
+
 public class Main {
-    public static void main(String[] args) {
-        /*✅ иррархия weapon -> gun -> smg получается 2 потомка
-        //✅ 2 интерфейса и каждый из них реализован(shooting в gun, а modificate в weapon)
-        //✅ абстрактный класс entity c абстрактной функцией printInfo()
-        //✅ КАЖДЫЙ класс содержит >2 полей
-        //✅ в каждом классе есть параметризированный конструктор
-        //✅ реализация инкапсуляции в entity, класс coords, где сеттеры posX posY являются private
-        //✅ статическое поле и метод в entity, counter и displayCounter()
-        //✅ методы в каждом классе
-        //✅ методы реализовывают какую-то сложную логику
+    public static void main(String[] args) throws Exception {
+        /*✅
+        //✅ Создать статический метод который принимает на вход три параметра: login, password и confirmPassword.
+        //✅ Login должен содержать только латинские буквы, цифры и знак подчеркивания.
+        //✅ Длина login должна быть меньше 20 символов. Если login не соответствует этим требованиям, необходимо выбросить WrongLoginException.
+        //✅ Password должен содержать только латинские буквы, цифры и знак подчеркивания. Длина password должна быть меньше 20 символов.
+        Также password и confirmPassword должны быть равны. Если password не соответствует этим требованиям, необходимо выбросить
+        WrongPasswordException.
+        //✅ WrongPasswordException и WrongLoginException - пользовательские классы исключения с двумя конструкторами
+        //✅ один по умолчанию, второй принимает сообщение исключения и передает его в конструктор класса Exception.
+        //✅ Обработка исключений проводится внутри метода.
+        //✅ Используем multi-catch block.
+        //✅ Метод возвращает true, если значения верны или false в другом случае.
         */
 
-        // у нас есть игрок и оружие
-        player Bob = new player("Bob");
-        Bob.printInfo();
-
-        player BigBob = new player("Big Bob", 200);
-        Bob.printInfo();
-        // printInfo и displayInfo это по сути выполняют одно и тоже, но printInfo это унаследованный от абстрактного класса
-        weapon axe = new weapon("axe", 19);
-        axe.displayInfo();
-
-        gun pistol = new gun("p250", 14,10);
-        pistol.displayInfo();
-
-        smg p90 = new smg("P90",27,50,"auto");
-        p90.displayInfo();
-
-        Bob.printInfo();
-        BigBob.printInfo();
-        System.out.println("Сущности созданны и получена информация о них\n");
-
-        Bob.attack(pistol, BigBob);
-        BigBob.printInfo();
-        System.out.println("О нееет! Bob стреляет в BigBob'a!\n");
-
-        Bob.attack(axe, BigBob);
-        BigBob.printInfo();
-        System.out.println("Ужас!!! Bob бьёт BigBob'a топором!\n");
-
-        if(!BigBob.getLive()){
-            BigBob.setHealthPoint(200);
-            BigBob.setLive(true);
-            BigBob.printInfo();
-            System.out.println("Возвращаем BigBob'a к жизни\n");
-        }
-        else {
-            BigBob.printInfo();
-            System.out.println();
+        String login = "Default_Login";
+        String password = "Default_Password123";
+        String confirmPassword = "Default_Password123";
+        if (args.length == 3){
+            login = args[0];
+            password = args[1];
+            confirmPassword = args[2];
         }
 
+        System.out.println(authentification(login,password,confirmPassword));
+    }
+    public static boolean authentification(String login,String password, String confirmPassword) throws Exception{
+        boolean auth = false;
+        try {
+            // используем регулярное выражение \w для проверки логина и пароля
+            boolean loginCheck = Pattern.compile("\\w").matcher(login).find() && login.length()<20;
+            boolean passwordCheck = Pattern.compile("\\w").matcher(password).find() && login.length()<20 && (password.equals(confirmPassword));
+            if (loginCheck && passwordCheck) {
+                auth = true;
+                System.out.println("You authorizated!");
+            }
+            else if (!loginCheck) {
+                throw new WrongLoginException();
+            }
+            else if(!passwordCheck) {
+                throw new WrongPasswordException();
+            }
+        }
+        catch (WrongLoginException LoginException){
+            auth = false;
+            System.out.println("ERR: "+ LoginException.getMessage());
+        }
+        catch (WrongPasswordException PasswordException){
+            auth = false;
+            System.out.println("ERR: "+ PasswordException.getMessage());
+        }
+        finally {
+            return auth;
+        }
+    }
 
-
-        Bob.attack(p90, BigBob);
-        BigBob.printInfo();
-        System.out.println("О нееет! Bob расстреливает BigBob'a!\n");
-
+    static class WrongLoginException extends Exception{
+        WrongLoginException(){
+            super("Wrong login!");
+        }
+        WrongLoginException(String message){
+            super(message);
+        }
+    }
+    static class WrongPasswordException extends Exception{
+        WrongPasswordException(){
+            super("Wrong password!");
+        }
+        WrongPasswordException(String message){
+            super(message);
+        }
     }
 }
