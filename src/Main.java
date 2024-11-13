@@ -1,15 +1,22 @@
+/**
+ * Класс Main, который использует функции классов в проекте для демонстрации выполненного задания.<br>
+ * ✅ иррархия <b>weapon</b> -> <b>gun</b> -> <b>smg</b> получается 2 потомка<br>
+ * ✅ 2 интерфейса и каждый из них реализован(из <b>shooting</b> в <b>gun</b>, а из <b>modificate</b> в <b>weapon</b>)<br>
+ * ✅ абстрактный класс entity c абстрактной функцией printInfo()<br>
+ * ✅ КАЖДЫЙ класс содержит >2 полей<br>
+ * ✅ в каждом классе есть параметризированный конструктор<br>
+ * ✅ реализация инкапсуляции в entity, класс coords, где сеттеры posX posY являются private<br>
+ * ✅ статическое поле и метод в entity, counter и displayCounter()<br>
+ * ✅ методы в каждом классе<br>
+ * ✅ методы реализовывают какую-то сложную логику<br>
+ */
 public class Main {
+    /**
+     * Это основной метод, использующий методы классов.
+     * @param args Не используется.
+     */
     public static void main(String[] args) {
-        /*✅ иррархия weapon -> gun -> smg получается 2 потомка
-        //✅ 2 интерфейса и каждый из них реализован(shooting в gun, а modificate в weapon)
-        //✅ абстрактный класс entity c абстрактной функцией printInfo()
-        //✅ КАЖДЫЙ класс содержит >2 полей
-        //✅ в каждом классе есть параметризированный конструктор
-        //✅ реализация инкапсуляции в entity, класс coords, где сеттеры posX posY являются private
-        //✅ статическое поле и метод в entity, counter и displayCounter()
-        //✅ методы в каждом классе
-        //✅ методы реализовывают какую-то сложную логику
-        */
+
 
         // у нас есть игрок и оружие
         player Bob = new player("Bob");
@@ -29,7 +36,7 @@ public class Main {
 
         Bob.printInfo();
         BigBob.printInfo();
-        System.out.println("Сущности созданны и получена информация о них\n");
+        System.out.println("Сущности созданы и получена информация о них\n");
 
         Bob.attack(pistol, BigBob);
         BigBob.printInfo();
@@ -50,11 +57,10 @@ public class Main {
             System.out.println();
         }
 
-
+        p90.ChangeFireMode("semi");
 
         Bob.attack(p90, BigBob);
         BigBob.printInfo();
         System.out.println("О нееет! Bob расстреливает BigBob'a!\n");
-
     }
 }
