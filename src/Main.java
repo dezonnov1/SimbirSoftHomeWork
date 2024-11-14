@@ -30,5 +30,16 @@ public class Main {
         System.out.println( stolInt.stealItem() ); // null
 
 
+        int testI =24;
+        double testD =26.0;
+
+        DevisionOn<Integer> devisionOn13I = x-> (x % 13) == 0;
+        System.out.println("Результат при " + testI + " % 26 = " + devisionOn13I.pred(testI));
+
+        DevisionOn<Double> devisionOn13D = x-> (-0.0001 < (x % 13)) && ((x % 13) < 0.0001); //
+        System.out.println("Результат при " + testD + " % 26 = " + devisionOn13D.pred(testD));
+
+
+
     }
 }
