@@ -37,7 +37,8 @@ public class Main {
         DevisionOn<Integer> devisionOn13I = x-> (x % 13) == 0;
         System.out.println("Результат при " + testI + " % 26 = " + devisionOn13I.pred(testI));
 
-        DevisionOn<Double> devisionOn13D = x-> (-0.0001 < (x % 13)) && ((x % 13) < 0.0001); // даем диапазон для принятия погрешности округления
+        // делаем диапазон для из-за погрешности округления
+        DevisionOn<Double> devisionOn13D = x-> (-0.0001 < (x % 13)) && ((x % 13) < 0.0001);
         System.out.println("Результат при " + testD + " % 26 = " + devisionOn13D.pred(testD));
 
         // (3)
