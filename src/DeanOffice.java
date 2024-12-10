@@ -93,7 +93,7 @@ public class DeanOffice {
         }
     }
 
-    public void setStudentDataBase(ArrayList<Students> studentDataBase){
+    public void setStudentDataBase(List<Students> studentDataBase){
         this.studentDataBase = studentDataBase;
     }
     /**
@@ -145,24 +145,25 @@ public class DeanOffice {
         if (studs.isEmpty()){
             return -1;
         }
-        int SizeStudentDB = studs.size();
+        int oldStudentSize = studs.size();
         List<Students> temp = new ArrayList<>();
         for (Students stud : studs){
             int sum = 0;
             if (stud.getEvaluations().isEmpty()) { //если у студента нет оценок, то его в temp не добавляем
                 continue; //Скипаем к следующему
             }
-            for (Integer it : stud.getEvaluations().values()) {
+            for (Integer it : stud.getEvaluations().values()) { // берем оценки
                 sum += it;
             }
-            if (sum / stud.getEvaluations().size() >= 3) {
+            int avgEvalutation = sum / stud.getEvaluations().size();
+            if (avgEvalutation >= 3) {
                 /*здесь catch на деление на ноль не нужен,
             ибо в первом if мы исключаем пустой список*/
                 temp.add(stud);
             }
         }
-        studs = new ArrayList<>(temp);
-        return SizeStudentDB - temp.size();
+        this.setStudentDataBase(temp);
+        return oldStudentSize - temp.size();
     }
 
 
@@ -191,6 +192,7 @@ public class DeanOffice {
                 promotedStudents++;
             }
         }
+        this.setStudentDataBase(studs);
         return promotedStudents;
     }
     /**

@@ -23,10 +23,9 @@ public class Main {
         dean.printAllStudents();
         System.out.println("Студенты 3-го курса");
         dean.printStudents(dean.getStudentDataBase(),3);
-        System.out.println("Удаляем " + dean.delBadStudents()+" студентов, со средним баллом <3.");
-        System.out.println("delStuds<3");
+        System.out.println("Удаляем " + dean.delBadStudents() + " студентов, со средним баллом <3.");
         dean.printAllStudents();
-        System.out.println("Переводим на курс старше" + dean.transferToOlderCourse()+" студентов, со средним балом >=3");
+        System.out.println("Переводим " + dean.transferToOlderCourse() + " студентов со средним балом >=3 на курс старше");
         dean.printAllStudents();
     }
 }
