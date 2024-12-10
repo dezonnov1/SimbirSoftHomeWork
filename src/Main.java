@@ -1,15 +1,31 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i test git= " + i);
-        }
+import java.util.random.RandomGenerator;
+
+public class Main {
+    /**
+     * Это основной метод, использующий методы классов.
+     * @param args Не используется.
+     */
+    public static void main(String[] args) {
+        /**
+         * Я как обычно лишний раз замарочился
+         * пополнение List'a со студентами пополсянется несколькими способами.
+         * Либо мы передаем параметры в функцию и внутри этой функции создается объект класса Students и помещается
+         * в List или мы передаем сам объект класса Students и внутри
+         */
+        DeanOffice dean = new DeanOffice();
+        String[] subjects = {"Русский", "Математика", "Информатика"};
+        dean.addStudentInStudentDataBase("Аня", "ИТСС", 1, subjects, new int[] {2,2,3});
+        dean.addStudentInStudentDataBase("Глеб", "ЖТО", 2, subjects, new int[] {3,3,3});
+        dean.addStudentInStudentDataBase("Боря", "ЖТО", 3, subjects, new int[] {4,4,3});
+        dean.addStudentInStudentDataBase("Ира", "ИТСС", 3, subjects, new int[] {5,5,5});
+
+        dean.printAllStudents();
+        System.out.println("Студенты 3-го курса");
+        dean.printStudents(dean.getStudentDataBase(),3);
+        System.out.println("Удаляем " + dean.delBadStudents() + " студентов, со средним баллом <3.");
+        dean.printAllStudents();
+        System.out.println("Переводим " + dean.transferToOlderCourse() + " студентов со средним балом >=3 на курс старше");
+        dean.printAllStudents();
     }
 }
